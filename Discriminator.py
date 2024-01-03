@@ -4,6 +4,12 @@ import torch.nn as nn
 class Discriminator(nn.Module):
     def __init__(self,latent_dim ,total_filters,image_channels):
         super(Discriminator, self).__init__()
+        self.latent_dim = latent_dim
+        self.total_filters = total_filters
+        self.image_channels = image_channels
+
+
+        
         self.layers = nn.Sequential(
             
             nn.Conv2d(image_channels, total_filters, 4, 2, 1, bias=True),
@@ -24,6 +30,11 @@ class Discriminator(nn.Module):
             nn.Conv2d(total_filters * 8, 1, 4, 1, 0, bias=False),
             nn.Sigmoid()
         )
+        
+        
+
+
+
 
     def forward(self, input):
         output = self.layers(input)

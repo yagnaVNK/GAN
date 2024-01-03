@@ -8,7 +8,7 @@ class Generator(nn.Module):
         self.latent_dim = latent_dim
         self.total_filters = total_filters
         self.image_channels = image_channels
-
+        
         self.layers= nn.Sequential(
             nn.ConvTranspose2d(self.latent_dim, self.total_filters * 8, kernel_size=4, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(self.total_filters * 8),
@@ -30,6 +30,10 @@ class Generator(nn.Module):
             nn.Tanh()
             
         )
+        
+        
+        
+
 
     def forward(self, input):
         output = self.layers(input)
