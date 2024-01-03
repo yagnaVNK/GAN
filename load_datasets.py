@@ -43,13 +43,15 @@ def _make_data_loaders(ds_train, ds_test, validate, num_workers=NUM_DATA_LOADER_
 
 def load_ImageNet100(validate = False):
     ds_train = ImageNet100(DATA_FOLDER, split="train", transform=transforms.Compose([
-            transforms.RandomResizedCrop(224),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor()]))
-    ds_test = ImageNet100(DATA_FOLDER, split="val", transform=transforms.Compose([
-            transforms.CenterCrop(224),
-            transforms.ToTensor()
-        ]))
+                               transforms.Resize(64),
+                               transforms.ToTensor(),
+                               transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                           ]))
+    ds_test = ImageNet100(DATA_FOLDER, split="val",transform=transforms.Compose([
+                               transforms.Resize(64),
+                               transforms.ToTensor(),
+                               transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+                           ]))
 
     return _make_data_loaders(ds_train, ds_test, validate)
 
