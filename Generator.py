@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 class Generator(nn.Module):
     def __init__(self,latent_dim ,total_filters,image_channels):
         super(Generator, self).__init__()
@@ -31,9 +30,6 @@ class Generator(nn.Module):
             
         )
         
-        
-        
-
 
     def forward(self, input):
         output = self.layers(input)
